@@ -1,2 +1,35 @@
 body {padding:0;margin:0;}
-#content .home-page-img {max-width:300px;}
+#content .home-page-img {float:left;}
+
+/* #### Mobile Phones Portrait #### */
+@media screen and (max-device-width: 480px) and (orientation: portrait){
+	#content .home-page-img {width:480px;}
+}
+
+/* #### Mobile Phones Landscape #### */
+@media screen and (max-device-width: 640px) and (orientation: landscape){
+	#content .home-page-img {width:640px;}
+}
+
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-device-width: 640px){
+	#content .home-page-img {width:640px;}
+}
+
+/* #### iPhone 4+ Portrait or Landscape #### */
+@media screen and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2){
+	#content .home-page-img {width:480px;}
+}
+
+/* #### Tablets Portrait or Landscape #### */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px){
+	#content .home-page-img {width:400px;}
+}
+
+/* #### Desktops #### */
+@media screen and (min-width: 1024px){
+	#content .home-page-img {width:400px;}
+}
+
+
+

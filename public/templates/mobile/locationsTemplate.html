@@ -1,0 +1,18 @@
+<div class="locations">
+	<input type="submit" value="Add new location"/>
+	<input type="submit" value="Delete Locations"/>
+
+	<% _.each(locations, function(location){ %>
+	<div class="location">
+		<div class="info">
+			<%= location.get("name")%><br>
+			<%= location.get("number") %> <%= location.get("street") %><br>
+			<%= location.get("city") %>, <%= location.get("state") %> <%= location.get("zip") %>
+		</div>
+		<div class="edit">
+			<input type="submit" value="Edit"/>
+		</div>
+		<br>
+	</div>
+	<% }); %>
+</div>
