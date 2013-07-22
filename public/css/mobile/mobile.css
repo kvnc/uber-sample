@@ -1,6 +1,11 @@
 body {padding:0;margin:0;}
 #content .home-page-img {float:left;}
 
+
+@media screen and (device-width: 320px) and (-webkit-device-pixel-ratio: 2) {
+	#content .home-page-img {width:320px;}
+}
+
 /* #### Mobile Phones Portrait #### */
 @media screen and (max-device-width: 480px) and (orientation: portrait){
 	#content .home-page-img {width:480px;}
