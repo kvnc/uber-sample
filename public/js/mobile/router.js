@@ -5,22 +5,16 @@ define([
   
   var AppRouter = Backbone.Router.extend({
     routes: {
-      'home/:user_id': 'userHome',
       '*actions': 'defaultAction'
     }
   });
   
   var initialize = function(){
     var app_router = new AppRouter;
-    
-    app_router.on('route:userHome', function (user_id) {
-        var view = new HomeView( {user_id: user_id});
-        view.render();
-    });
 
     app_router.on('route:defaultAction', function () {
-        var view = new HomeView();
-        view.render();
+        this.homeView = new HomeView();
+        this.homeView.render();
     });
 
     Backbone.history.start();

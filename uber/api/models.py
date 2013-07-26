@@ -10,8 +10,7 @@ class Location(db.Model):
     name = db.Column(db.String(40), nullable="False")
     lat = db.Column(db.Float, nullable="False")
     lng = db.Column(db.Float, nullable="False")
-    number = db.Column(db.Integer, nullable="False")
-    street = db.Column(db.String(20), nullable="False")
+    street = db.Column(db.String(50), nullable="False")
     city = db.Column(db.String(20), nullable="False")
     state = db.Column(db.String(20), nullable="False")
     zip = db.Column(db.String(15), nullable="False")
@@ -24,7 +23,6 @@ class Location(db.Model):
             'name' : self.name,
             'lat' : self.lat,
             'lng' : self.lng,
-            'number' : self.number,
             'street' : self.street,
             'city' : self.city,
             'state' : self.state,

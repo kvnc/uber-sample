@@ -2,45 +2,61 @@ from flask import Flask, jsonify, abort, make_response, request, json
 from flask.ext import restful
 from flask.ext.restful import abort, Api, Resource
 from uber import app, db
-import models
+import models, urllib, urllib2
 
 api = restful.Api(app);
 
-def user_id_404(user_id):
-    abort(404, message="User {} does not exist".format(user_id))
+def location_404(id):
+    abort(404, message="Location {} does not exist".format(id))
+
+def getGeoCode(street,city,state,zip):
+    address = '{0}+{1}+{2}+{3}'.format(street,city,state,zip) 
+    url="http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % urllib.quote(address)
+    response = urllib2.urlopen(url)
+    return json.loads(response.read())
 
 class Location(Resource):
     def post(self):
         j = json.loads(request.data)
-        u = models.Location(user_id=1,name='home',lat=-175.3,lng=-65.2,number=1927,street='E Hawthorne St',city='Tucson',state='AZ',zip='85719')
-        u = models.Location(name=j["name"])
+        geocode = getGeoCode(j["street"],j["city"],j["state"],j["zip"])
+        lat = geocode["results"][0]["geometry"]["location"]["lat"]
+        lng = geocode["results"][0]["geometry"]["location"]["lng"]
+        u = models.Location(user_id=j["user_id"],name=j["name"],lat=lat,lng=lng,street=j["street"],city=j["city"],state=j["state"],zip=j["zip"])
         db.session.add(u)
         db.session.commit()
-        return u.id, 201
+        return u.serialize, 201
 
 class Locations(Resource):
-    def get(self, user_id):
-        return [i.serialize for i in db.session.query(models.Location).filter(models.Location.user_id == user_id)]
+    def get(self, id):
+        return [i.serialize for i in db.session.query(models.Location).filter(models.Location.user_id == id)]
 
-    def delete(self, location_id):
-        u = models.Location.query.get(location_id)
+    def delete(self, id):
+        u = models.Location.query.get(id)
         if u is None:
-            location_404(location_id)
+            location_404(id)
         
         db.session.delete(u)
         db.session.commit()            
-        return location_404, 204
+        return id, 204
 
-    def put(self, location_id):
-        u = models.Location.query.get(location_id)
+    def put(self, id):
+        u = models.Location.query.get(id)
         if u is None:
-            location_404(location_id)
+            location_404(id)
 
         j = json.loads(request.data)
-        u.name = j["name"]
-        db.session.commit()
+        geocode = getGeoCode(j["street"],j["city"],j["state"],j["zip"])
 
-        return location_id, 201
+        u.user_id = j["user_id"]
+        u.name = j["name"]
+        u.lat = geocode["results"][0]["geometry"]["location"]["lat"]
+        u.lng = geocode["results"][0]["geometry"]["location"]["lng"]
+        u.street = j["street"]
+        u.city = j["city"]
+        u.state = j["state"]
+        u.zip = j["zip"]
+        db.session.commit()
+        return u.serialize, 201
 
 api.add_resource(Location, '/api/location')
-api.add_resource(Locations, '/api/location/<string:user_id>')
+api.add_resource(Locations, '/api/location/<string:id>')

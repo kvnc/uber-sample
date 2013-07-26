@@ -1,0 +1,50 @@
+<div class="panel panel-slide-left">
+	<div class="top-nav">
+		<div class="title">
+			<% if (obj.id == null) { %>
+				Add Location
+			<% } %>
+		</div>
+		<div class="go-back">Back</div>
+		<% if (obj.id == null) { %>
+		<div class="save">Save</div>
+		<% } else { %>
+		<div class="edit">Edit</div>
+		<% } %>
+	</div>
+	<div class="location-edit">
+		<div class="fields">
+			<span class="header">Name</span>
+			<div class="field name">
+				<input id="name" <% if (obj.id != null) { %> disabled="disabled" <% } %> value="<%= name %>" />
+			</div>
+		</div>
+		<div class="fields">
+			<span class="header">Location</span>
+			<div class="field">
+				<span>Address</span>
+				<input id="street" <% if (obj.id != null) { %> disabled="disabled" <% } %> value="<%= street %>" />
+			</div>
+			<div class="field">
+				<span>City</span>
+				<input id="city" <% if (obj.id != null) { %> disabled="disabled" <% } %> value="<%= city %>" />
+			</div>
+			<div class="field">
+				<span>State</span>
+				<input id="state" <% if (obj.id != null) { %> disabled="disabled" <% } %> value="<%= state %>" />
+			</div>
+			<div class="field">
+				<span>Zip Code</span>
+				<input id="zip" <% if (obj.id != null) { %> disabled="disabled" <% } %> value="<%= zip %>" />
+			</div>
+		</div>
+		<% if (obj.id != null) { %>
+		<div class="map">
+			<span class="header">Map</span>
+			<iframe width="100%" height="159" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/?q=<%= lat %>,<%= lng %>&amp;ie=UTF8&amp;output=embed"></iframe>
+		</div>
+		<% } %>
+		<div class="delete-button">Delete Location</div>
+		<div class="notification"></div>
+	</div>
+</div>

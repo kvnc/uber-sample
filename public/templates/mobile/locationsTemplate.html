@@ -1,18 +1,16 @@
-<div class="locations">
-	<input type="submit" value="Add new location"/>
-	<input type="submit" value="Delete Locations"/>
-
-	<% _.each(locations, function(location){ %>
-	<div class="location">
-		<div class="info">
-			<%= location.get("name")%><br>
-			<%= location.get("number") %> <%= location.get("street") %><br>
-			<%= location.get("city") %>, <%= location.get("state") %> <%= location.get("zip") %>
-		</div>
-		<div class="edit">
-			<input type="submit" value="Edit"/>
-		</div>
-		<br>
+<div class="panel">
+	<div class="top-nav">
+		<div class="title">My Locations</div>
+		<div class="go-back">Back</div>
 	</div>
-	<% }); %>
+	<div class="locations-list">
+		<div class="row add-location">
+			<span><span class="box">+</span>  Add a new location</span>
+		</div>
+		<% _.each(locations, function(location){ %>
+		<div class="row location" data-id="<%= location.get("id") %>">
+			<span><%= location.get("name")%> - <%= location.get("street") %></span>
+		</div>
+		<% }); %>
+	</div>
 </div>

@@ -4,10 +4,7 @@ define([
 ], function(Backbone, Location){
 	var Locations = Backbone.Collection.extend({
 		model: Location,
-		url: '/app/services/location',
-		initialize: function() {
-			console.log('Locations Collection Initialized');
-		}
+		url: '/api/location/1'
 	})
 	return Locations;
 });
