@@ -1,0 +1,3 @@
+This is a sample project that allows users to manage a set of Favorite Locations.  They are able to add, remove and edit these locations.  It is a single page app with a backbone.js while incorporating require.js to manage file dependencies.  The RESTful API is built using python which takes in and sends back JSON.
+
+I modeled the design to match the Uber iPhone app.  It is essentially a version of the iPhone app that is to be used on a DESKTOP browser.  It has NOT been optimized for mobile.

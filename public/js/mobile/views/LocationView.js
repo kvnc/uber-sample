@@ -13,7 +13,6 @@ define([
 
     render:function (eventName) {
       this.$el.html(_.template(LocationTemplate, this.model.toJSON()));
-      this.$el.find('#name').focus();
     },
  
     events:{
