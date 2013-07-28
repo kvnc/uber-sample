@@ -1,3 +1,5 @@
+// setup require.js settings and initialize app which will initialize the backbone 
+// router, can add more calls to app if needed in future
 require.config({
   paths: {
     jquery: '/public/js/libraries/jquery-min',

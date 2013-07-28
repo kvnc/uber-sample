@@ -9,11 +9,15 @@ api = restful.Api(app);
 def location_404(id):
     abort(404, message="Location {} does not exist".format(id))
 
+# get lat and lng from google based on location that user entered
 def getGeoCode(street,city,state,zip):
     address = '{0}+{1}+{2}+{3}'.format(street,city,state,zip) 
     url="http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % urllib.quote(address)
     response = urllib2.urlopen(url)
-    return json.loads(response.read())
+    try:
+        return json.loads(response.read())
+    except:
+        return None
 
 class Location(Resource):
     def post(self):
@@ -49,12 +53,18 @@ class Locations(Resource):
 
         u.user_id = j["user_id"]
         u.name = j["name"]
-        u.lat = geocode["results"][0]["geometry"]["location"]["lat"]
-        u.lng = geocode["results"][0]["geometry"]["location"]["lng"]
         u.street = j["street"]
         u.city = j["city"]
         u.state = j["state"]
         u.zip = j["zip"]
+
+        if geocode is not None:
+            u.lat = geocode["results"][0]["geometry"]["location"]["lat"]
+            u.lng = geocode["results"][0]["geometry"]["location"]["lng"]
+        else:
+            u.lat = 0
+            u.ng = 0
+     
         db.session.commit()
         return u.serialize, 201
 

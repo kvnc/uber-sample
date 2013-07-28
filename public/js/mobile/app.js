@@ -1,3 +1,4 @@
+// initialize the backbone router
 define([
   'backbone',
   'router'

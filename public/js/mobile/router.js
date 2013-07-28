@@ -1,3 +1,5 @@
+// very minimal backbone router because app is designed for non-browser use where URL is irrelevant.  user always
+// has to start from the homepage so all routes lead to the home page.  Direct URL access to certain views is not needed
 define([
   'backbone',
   'views/HomeView'
