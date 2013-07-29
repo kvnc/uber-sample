@@ -44,7 +44,7 @@
 }
 
 body {padding:0;margin:0;font-family: 'myhotahatchedbold', Arial}
-#content {width:360px;border:1px solid #000;border-radius:5px;margin:10px auto;position: relative;overflow:hidden;min-width:360px;}
+#content {width:360px;height:619px;border:1px solid #000;border-radius:5px;margin:10px auto;position: relative;overflow:hidden;}
 #content #home-view {position: relative;}
 #content #home-view .home-page-img {float:left;width:100%;cursor:pointer;}
 #content #panels .panel {
